@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { SpotifyLogo } from 'phosphor-react'
 
-const CLIENT_ID = 'd01c25e7230c459c809567db676e0f83'
-const CLIENT_SECRET = 'd96f38d7df61439d9e2696d85fb3ad42'
+const CLIENT_ID = import.meta.env.VITE_CLIENT_ID
+const CLIENT_SECRET = import.meta.env.VITE_CLIENT_SECRET
 
 export const App = () => {
   const [searchInput, setSearchInput] = useState('')
