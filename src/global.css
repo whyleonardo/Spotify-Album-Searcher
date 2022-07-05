@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
 body {
-  @apply bg-slate-800;
+  @apply bg-brand-100;
 }
