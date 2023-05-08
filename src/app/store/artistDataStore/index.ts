@@ -1,16 +1,16 @@
 import { create } from 'zustand'
 
 type Artist = {
-  id: string
-  name: string
+	id: string
+	name: string
 }
 
 type Store = {
-  artistData: Artist
-  newArtistData: (newData: Artist) => void
+	artistData: Artist
+	newArtistData: (newData: Artist) => void
 }
 
 export const useArtistDataStore = create<Store>()((set) => ({
-  artistData: {} as Artist,
-  newArtistData: (newData: Artist) => set(() => ({ artistData: newData })),
+	artistData: {} as Artist,
+	newArtistData: (newData: Artist) => set(() => ({ artistData: newData }))
 }))

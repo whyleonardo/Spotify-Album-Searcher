@@ -1,40 +1,60 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 'use client'
 
-import { SearchAlbumField } from "@/components/ui/SearchAlbumField"
-import { AlbumsGrid } from "@/components/ui/AlbumsGrid"
+import Link from 'next/link'
+
+import { AlbumsGrid } from '@/components/ui/AlbumsGrid'
+import { SearchAlbumField } from '@/components/ui/SearchAlbumField'
+
+import { useArtistDataStore } from '@/store/artistDataStore'
 import { LinkedinLogo, GithubLogo } from '@phosphor-icons/react'
-import Link from "next/link"
 
 export default function Home() {
-  return (
-    <div className="flex flex-col pt-8 px-8 justify-center items-center min-h-screen w-full bg-zinc-900 text-white">
-      <div className="flex flex-col gap-4">
-        <h1 className='tracking-tighter leading-tighter text-5xl font-bold bg-gradient-to-t text-center from-green-200 to-green-600 text-transparent bg-clip-text'
-        >
-          Spotify Album Searcher
-        </h1>
+	const { artistData } = useArtistDataStore()
 
-        {/* @ts-ignore - Server Component */}
-        <SearchAlbumField />
-        <AlbumsGrid/>
-      </div>
+	const currentYear = new Date().getFullYear()
 
-      <div className="flex flex-col items-center my-6 gap-2">
-        <span className="text-xl tracking-tighter underline">Christian Leonardo - 2023</span>
+	return (
+		<div className="flex min-h-screen w-full flex-col items-center justify-center bg-zinc-900 px-8 pt-8 text-white">
+			<div className="flex flex-col gap-4">
+				<h1 className="bg-gradient-to-t from-green-200 to-green-600 bg-clip-text text-center text-5xl font-bold leading-tight tracking-tighter text-transparent">
+					Spotify Album Searcher
+				</h1>
 
-        <div className="flex gap-2">
-          <Link href='https://linkedin.com/in/christianlsb'>
-            <LinkedinLogo className="text-blue-500 hover:text-white transition-colors duration-300" size={36}/>
-          </Link>
+				{/* @ts-ignore - Server Component */}
+				<SearchAlbumField />
 
+				{artistData.name && (
+					<h1 className="my-8 text-center text-4xl tracking-tighter ">
+						Your results for:
+						<span className="block text-center">{artistData.name}</span>
+					</h1>
+				)}
 
-          <Link href='https://github.com/whyleonardo'>
-            <GithubLogo className="text-orange-500 hover:text-white transition-colors duration-300" size={36}/>
-          </Link>
+				<AlbumsGrid />
+			</div>
 
-        </div>
+			<div className="my-6 flex flex-col items-center gap-2">
+				<span className="text-xl tracking-tighter text-white">
+					Christian Leonardo - {currentYear}
+				</span>
 
-      </div>
-   </div>
-  )
+				<div className="flex gap-2">
+					<Link href="https://linkedin.com/in/christianlsb">
+						<LinkedinLogo
+							className="text-blue-500 transition-colors duration-300 hover:text-white"
+							size={36}
+						/>
+					</Link>
+
+					<Link href="https://github.com/whyleonardo">
+						<GithubLogo
+							className="text-orange-500 transition-colors duration-300 hover:text-white"
+							size={36}
+						/>
+					</Link>
+				</div>
+			</div>
+		</div>
+	)
 }
